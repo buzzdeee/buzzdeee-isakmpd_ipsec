@@ -32,4 +32,10 @@ define isakmpd_ipsec::ipsec_conf (
     subscribe   => File["/etc/ipsec.conf.$title"],
   }
 
+  rclocal::script { $title":
+    content => "/sbin/ipsecctl -f /etc/ipsec.conf.$title",
+    require => "/etc/ipsec.conf.$title",
+    autoexec => false,
+  }
+
 }
