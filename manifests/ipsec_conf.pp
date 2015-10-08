@@ -34,7 +34,7 @@ define isakmpd_ipsec::ipsec_conf (
 
   rclocal::script { $title:
     content => "/sbin/ipsecctl -f /etc/ipsec.conf.$title",
-    require => "/etc/ipsec.conf.$title",
+    require => File["/etc/ipsec.conf.$title"],
     autoexec => false,
   }
 
