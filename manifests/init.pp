@@ -54,8 +54,8 @@ class isakmpd_ipsec (
   }
 
   class { 'isakmpd_ipsec::service':
-    isakmpd_ensure     => $isakmpd_service_ensure,
-    isakmpd_flags      => $isakmpd_service_flags,
+    isakmpd_ensure => $isakmpd_service_ensure,
+    isakmpd_flags  => $isakmpd_service_flags,
   }
 
   create_resources(isakmpd_ipsec::ipsec_conf, $ipsec_flows)

@@ -1,3 +1,5 @@
+# Private class, do not use directly
+# this class takes care of the isakmpd.conf file
 class isakmpd_ipsec::isakmpd_conf (
   $isakmpd_listen_on,
   $isakmpd_phase_one_lifetime,
@@ -10,5 +12,5 @@ class isakmpd_ipsec::isakmpd_conf (
     group   => '0',
     mode    => '0600',
     content => template('isakmpd_ipsec/isakmpd.conf.erb'),
-  }  
+  }
 }

@@ -1,3 +1,5 @@
+# Do not use directly, this class defines some
+# default values for the module
 class isakmpd_ipsec::params {
   $isakmpd_listen_on          = '0.0.0.0'
   $isakmpd_phase_one_lifetime = '28800,60:86400'
