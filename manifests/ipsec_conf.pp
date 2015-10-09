@@ -1,3 +1,5 @@
+# This define takes care to create /etc/ipsec.conf.$title
+# files, and to create an entry for rc.local.d to load it at boot
 define isakmpd_ipsec::ipsec_conf (
   $localip,
   $peerip,
@@ -12,29 +14,29 @@ define isakmpd_ipsec::ipsec_conf (
   $quick_dh_group = 'modp1024',
 ) {
 
-  file { "/etc/ipsec.conf.$title":
+  file { "/etc/ipsec.conf.${title}":
     owner   => 'root',
     group   => '0',
     mode    => '0640',
     content => template('isakmpd_ipsec/ipsec.conf.erb'),
   }
 
-  exec { "reset old $title flow":
-    command => "/sbin/ipsecctl -d -f /etc/ipsec.conf.$title",
+  exec { "reset old ${title} flow":
+    command     => "/sbin/ipsecctl -d -f /etc/ipsec.conf.${title}",
     refreshonly => true,
-    subscribe   => File["/etc/ipsec.conf.$title"],
-    before      => Exec["set new $title flow"]
+    subscribe   => File["/etc/ipsec.conf.${title}"],
+    before      => Exec["set new ${title} flow"]
   }
 
-  exec { "set new $title flow":
-    command => "/sbin/ipsecctl -f /etc/ipsec.conf.$title",
+  exec { "set new ${title} flow":
+    command     => "/sbin/ipsecctl -f /etc/ipsec.conf.${title}",
     refreshonly => true,
-    subscribe   => File["/etc/ipsec.conf.$title"],
+    subscribe   => File["/etc/ipsec.conf.${title}"],
   }
 
-  rclocal::script { $title:
-    content => "/sbin/ipsecctl -f /etc/ipsec.conf.$title",
-    require => File["/etc/ipsec.conf.$title"],
+  rclocal::script { "${module_name}_${title}":
+    content  => "/sbin/ipsecctl -f /etc/ipsec.conf.${title}",
+    require  => File["/etc/ipsec.conf.${title}"],
     autoexec => false,
   }
 
