@@ -43,7 +43,7 @@ class isakmpd_ipsec (
   $isakmpd_policy_file        = $::isakmpd_ipsec::params::isakmpd_policy_file,
   $isakmpd_service_flags      = $::isakmpd_ipsec::params::isakmpd_service_flags,
   $isakmpd_service_ensure     = $::isakmpd_ipsec::params::isakmpd_service_ensure,
-  $ipsec_flows,
+  $ipsec_flows = undef,
 ) inherits isakmpd_ipsec::params {
   class { 'isakmpd_ipsec::isakmpd_conf':
     isakmpd_listen_on          => $isakmpd_listen_on,
@@ -58,7 +58,9 @@ class isakmpd_ipsec (
     isakmpd_flags  => $isakmpd_service_flags,
   }
 
-  create_resources(isakmpd_ipsec::ipsec_conf, $ipsec_flows)
+  if $ipsec_flows {
+    create_resources(isakmpd_ipsec::ipsec_conf, $ipsec_flows)
+  }
 
   Class['isakmpd_ipsec::isakmpd_conf'] ~>
   Class['isakmpd_ipsec::service']
