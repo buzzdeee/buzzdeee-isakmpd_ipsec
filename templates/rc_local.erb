@@ -1,0 +1,4 @@
+# This file is managed via Puppet
+#
+echo starting ipsec for <%= @title %>
+/sbin/ipsecctl -f /etc/ipsec.conf.<%= @title %>
