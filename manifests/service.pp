@@ -11,11 +11,11 @@ class isakmpd_ipsec::service (
     $value = 0
   }
 
-  Sysctl::Value { value => $value }
+  Sysctl { value => $value }
 
-  sysctl::value { 'net.inet.ah.enable': }
-  sysctl::value { 'net.inet.esp.enable': }
-  sysctl::value { 'net.inet.ipcomp.enable': }
+  sysctl { 'net.inet.ah.enable': }
+  sysctl { 'net.inet.esp.enable': }
+  sysctl { 'net.inet.ipcomp.enable': }
 
 
   service { 'isakmpd':

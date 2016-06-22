@@ -8,7 +8,12 @@
   "project_page": "https://github.com/buzzdeee/buzzdeee-isakmpd_ipsec",
   "issues_url": "https://github.com/buzzdeee/buzzdeee-isakmpd_ipsec/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+    { "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    { "name": "herculesteam-augeasproviders_sysctl",
+      "version_requirement": ">= 2.0.2"
+    }
   ]
 }
 
